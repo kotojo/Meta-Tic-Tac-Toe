@@ -1,0 +1,28 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+.header {
+  text-align: center;
+}
+
+.game {
+  //background-color: black;
+}
+
+.error {
+  background-color: red;
+}
+
+.innerbox {
+  border: solid black 1px;
+  padding: 0;
+  text-align: center;
+  font-size: 3vw;
+  height: 5.018vw;
+}
+
+.outerbox {
+  border: solid blue 1px;
+}
