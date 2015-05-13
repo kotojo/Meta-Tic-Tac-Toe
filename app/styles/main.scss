@@ -26,3 +26,11 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 .outerbox {
   border: solid blue 1px;
 }
+
+.active {
+  background-color: yellow;
+}
+
+#playerTurn {
+  font-size: 3vw;
+}
