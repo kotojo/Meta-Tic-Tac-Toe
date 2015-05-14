@@ -39,6 +39,12 @@ $(document).ready(function() {
 
         if ($('input[type="checkbox"]').is(':checked')) {
           compActive();
+          if (turn === 'X') { //changes player
+            turn = 'O';
+          }
+          else {
+            turn = 'X';
+          }
         }
       }
       else if ($('.outerbox').hasClass('active')) {
@@ -52,12 +58,12 @@ $(document).ready(function() {
         else {
           compActive();
         }
-      }
-      if (turn === 'X') { //changes player
+        if (turn === 'X') { //changes player
         turn = 'O';
-      }
-      else {
-        turn = 'X';
+        }
+        else {
+          turn = 'X';
+        }
       }
       playerTurn();
     });
