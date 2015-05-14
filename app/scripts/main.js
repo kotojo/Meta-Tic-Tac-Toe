@@ -2,15 +2,23 @@ $(document).ready(function() {
 
   'use strict';
 
-  var turn = 'O'; //initalizes turn
+  var turn = 'X'; //initalizes turn
 
   var playerTurn = function () {
     $('#playerTurn').text(turn + '\'s turn');
   };
 
+  var compActive = function() {
+    var square = Math.floor((Math.random() * 9) + 1);
+    var choice = '#outer'+square.toString();
+    $(choice).addClass('active');
+  };
+
+  compActive();
+
   playerTurn();
 
-   $('div > div.innerbox').click(function(){                //click function to play
+    $('div > div.innerbox').click(function(){                //click function to play
       var that = $(this);
       if ($(this).parents('.outerbox').hasClass('active')){
         if(that.text() === 'X' || that.text() === 'O'){
@@ -28,22 +36,31 @@ $(document).ready(function() {
         getOutsideWinner();
 
         that.parents('.outerbox').removeClass('active');
+
+        if ($('input[type="checkbox"]').is(':checked')) {
+          compActive();
+        }
       }
       else if ($('.outerbox').hasClass('active')) {
         return;
       }
+
       else {
-        that.parents('.outerbox').addClass('active');
-        if (turn === 'X') { //changes player
-          turn = 'O';
+        if ($('input[type="checkbox"]').is(':not(:checked)')) {
+          that.parents('.outerbox').addClass('active');
         }
         else {
-          turn = 'X';
+          compActive();
         }
-        playerTurn();
-        console.log(that);
       }
-  });
+      if (turn === 'X') { //changes player
+        turn = 'O';
+      }
+      else {
+        turn = 'X';
+      }
+      playerTurn();
+    });
 
    var xWon = function(z) {
     z.parents('.outerbox').children().children('#box1, #box3, #box5, #box7, #box9').css('background-color', 'black');
@@ -58,28 +75,28 @@ $(document).ready(function() {
    var getOutsideWinner = function () { //when someone wins inside game it adds class x or o, this checks those for full winner.
     var y = 'x';
     for (var i=0; i<2; i++) {
-      if ($('#outerone').hasClass(y) && $('#outertwo').hasClass(y) && $('#outerthree').hasClass(y)) {
+      if ($('#outer1').hasClass(y) && $('#outer2').hasClass(y) && $('#outer3').hasClass(y)) {
         console.log(y + 'is winner!');
       }
-      else if ($('#outerfour').hasClass(y) && $('#outerfive').hasClass(y) && $('#outersix').hasClass(y)) {
+      else if ($('#outer4').hasClass(y) && $('#outer5').hasClass(y) && $('#outer6').hasClass(y)) {
         console.log(y + 'is winner!');
       }
-      else if ($('#outerseven').hasClass(y) && $('#outereight').hasClass(y) && $('#outernine').hasClass(y)) {
+      else if ($('#outer7').hasClass(y) && $('#outer8').hasClass(y) && $('#outer9').hasClass(y)) {
         console.log(y + 'is winner!');
       }
-      else if ($('#outerone').hasClass(y) && $('#outerfour').hasClass(y) && $('#outerseven').hasClass(y)) {
+      else if ($('#outer1').hasClass(y) && $('#outer4').hasClass(y) && $('#outer7').hasClass(y)) {
         console.log(y + 'is winner!');
       }
-      else if ($('#outertwo').hasClass(y) && $('#outerfive').hasClass(y) && $('#outereight').hasClass(y)) {
+      else if ($('#outer2').hasClass(y) && $('#outer5').hasClass(y) && $('#outer8').hasClass(y)) {
         console.log(y + 'is winner!');
       }
-      else if ($('#outerthree').hasClass(y) && $('#outersix').hasClass(y) && $('#outernine').hasClass(y)) {
+      else if ($('#outer3').hasClass(y) && $('#outer6').hasClass(y) && $('#outer9').hasClass(y)) {
         console.log(y + 'is winner!');
       }
-      else if ($('#outerone').hasClass(y) && $('#outerfive').hasClass(y) && $('#outernine').hasClass(y)) {
+      else if ($('#outer1').hasClass(y) && $('#outer5').hasClass(y) && $('#outer9').hasClass(y)) {
         console.log(y + 'is winner!');
       }
-      else if ($('#outerthree').hasClass(y) && $('#outerfive').hasClass(y) && $('#outerseven').hasClass(y)) {
+      else if ($('#outer3').hasClass(y) && $('#outer5').hasClass(y) && $('#outer7').hasClass(y)) {
         console.log(y + 'is winner!');
       }
       else{
