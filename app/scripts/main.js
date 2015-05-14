@@ -4,11 +4,7 @@ $(document).ready(function() {
 
   var turn = 'X'; //initalizes turn
   var gameClone;
-  var copy = function() {
-    gameClone = $('.game').clone();
-  };
-
-  copy(); //makes a duplicate of the game to restart with
+  gameClone = $('.game').clone();//makes a duplicate of the game to restart with
 
   $('#restart').hide();
 

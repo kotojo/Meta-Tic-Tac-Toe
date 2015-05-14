@@ -3,13 +3,52 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+.topTitle {
+  background-color: #48A4CC;
+  border-radius: 0px 0px 25px 25px;
+  opacity: .7;
+}
+
+.space {
+  margin-bottom: 10px;
+}
+
+body {
+  color: #CCC648;
+  font-size: 2vw;
+  text-align: justify;
+  text-justify: inter-word;
+  background-image: url("https://download.unsplash.com/uploads/14126758789351371c7ec/aa322c2d");
+  background-size: cover;
+}
+
 .header {
   text-align: center;
+  font-family: 'Lobster', cursive;
+  color: #FFDC73;
+}
+h1 {
+  margin-top: 0px;
+  padding-top: 10px;
 }
 
 .row {
-  font-size: 5vw;
+  //font-size: 5vw;
   text-align: center;
+  #playerTurn {
+    background-color:rgba(72,164,204,0.5);
+    border-radius: 25px;
+  }
+}
+
+ul {
+  padding-left: 0px;
+  background-color:rgba(72,164,204,0.5);
+  border-radius: 25px;
+}
+
+li {
+  list-style-type: none;
 }
 
 .error {
@@ -17,19 +56,22 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 }
 
 .innerbox {
-  border: solid black 1px;
+  border: solid #292536  1px;
+  //border-radius: 25px;
   padding: 0;
   text-align: center;
-  font-size: 3vw;
+  font-size: 3.5vw;
   height: 5.018vw;
 }
 
 .outerbox {
-  border: solid blue 1px;
+  border: solid #CCC648 3px;
+  background-color: #B3D4FF;
+  //border-radius: 25px;
 }
 
 .active {
-  background-color: yellow;
+  background-color: #FFDC73;
 }
 
 #playerTurn {
@@ -37,11 +79,18 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 }
 
 label {
+  position:relative;
   font-size: 2vw;
+  padding-left: -40px;
+  background-color:rgba(72,164,204,0.5);
+  border-radius: 25px;
 }
 
 .checkbox {
   margin-top: 0px;
+  label {
+    padding-left: 0px;
+  }
 }
 
 input {

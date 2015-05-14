@@ -14,15 +14,23 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/animate.css">
+    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <!-- endbuild -->
   </head>
   <body>
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
-    <div class="header">
-      <h1>Meta Tic Tac Toe</h1>
+    <div class="container">
+    <div class="row space">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-6 topTitle">
+      <div class="header">
+        <h1>Meta Tic Tac Toe</h1>
+      </div>
+    </div>
+    <div class="col-xs-3"></div>
+    </div>
     </div>
 
     <div class="container">
@@ -227,6 +235,25 @@
             <label>
               <input type="checkbox"> Random Square Assignment
             </label>
+          </div>
+          <div class="accordion" id="accordion2">
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                  Rules
+                </a>
+              </div>
+              <div id="collapseOne" class="accordion-body collapse in">
+                <div class="accordion-inner">
+                  <ul>
+                    <li>Yellow square is only active game square.</li>
+                    <li>Default set for player to choose where opponent plays.</li>
+                    <li>Must win three inner games in a line to win the full game</li>
+                    <li>Good luck!</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
