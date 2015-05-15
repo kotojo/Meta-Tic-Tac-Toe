@@ -5,6 +5,15 @@ $(document).ready(function() {
   var turn = 'X'; //initalizes turn
   var gameClone;
   gameClone = $('.game').clone();//makes a duplicate of the game to restart with
+  var winArr = [[null, null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null, null]];
 
   $('#restart').hide();
 
@@ -12,7 +21,7 @@ $(document).ready(function() {
     $('#playerTurn').text(turn + '\'s turn');
   };
 
-  var compActive = function() {
+  var compActive = function() {  //randomly chooses active square
     var square = Math.floor((Math.random() * 9) + 1);
     var choice = '#outer'+square.toString();
     if ($(choice).hasClass('x') || $(choice).hasClass('o')) {
@@ -36,6 +45,9 @@ $(document).ready(function() {
     $('div').on('click', 'div.innerbox', function(event){                //click function to play
       event.stopPropagation();
       var that = $(this);
+      var innerThat = (that.attr('id').substr(that.attr('id').length - 1));
+      var outerThat = (that.parents('.outerbox').attr('id').substr(that.parents('.outerbox').attr('id').length -1));
+
       if ($(this).parents('.outerbox').hasClass('active')){ //if clickedsquare is active do this
         if(that.text() === 'X' || that.text() === 'O'){
 
@@ -46,6 +58,7 @@ $(document).ready(function() {
           return;
         }
         else {
+          winArr[outerThat - 1][innerThat -1] = turn;
           that.text(turn);
         }
 
