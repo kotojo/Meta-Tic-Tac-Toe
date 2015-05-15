@@ -5,7 +5,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
 .topTitle {
   background-color: #48A4CC;
-  border-radius: 0px 0px 25px 25px;
+  border-radius: 0px 0px 1vw 1vw;
   opacity: .7;
 }
 
@@ -18,8 +18,15 @@ body {
   font-size: 2vw;
   text-align: justify;
   text-justify: inter-word;
-  background-image: url('../images/background.jpeg');
-  background-size: cover;
+  background: url('../images/background.jpeg') no-repeat center center;
+  background-size: 1920px 1080px;
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    background: url('../images/phonebackground.png') no-repeat;
+    background-size: cover;
+  }
 }
 
 .header {
@@ -30,21 +37,21 @@ body {
 h1 {
   margin-top: 0px;
   padding-top: 10px;
+  font-size: 2em;
 }
 
 .row {
-  //font-size: 5vw;
   text-align: center;
   #playerTurn {
     background-color:rgba(72,164,204,0.5);
-    border-radius: 25px;
+    border-radius: 2vw;
   }
 }
 
 ul {
   padding-left: 0px;
   background-color:rgba(72,164,204,0.5);
-  border-radius: 25px;
+  border-radius: 2vw;
 }
 
 li {
@@ -81,7 +88,6 @@ li {
 label {
   position:relative;
   font-size: 2vw;
-  padding-left: -40px;
   background-color:rgba(72,164,204,0.5);
   border-radius: 25px;
 }

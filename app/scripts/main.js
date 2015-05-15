@@ -14,6 +14,7 @@ $(document).ready(function() {
                 [null, null, null, null, null, null, null, null, null],
                 [null, null, null, null, null, null, null, null, null],
                 [null, null, null, null, null, null, null, null, null]];
+  console.log(winArr);
 
   $('#restart').hide();
 
@@ -59,11 +60,12 @@ $(document).ready(function() {
         }
         else {
           winArr[outerThat - 1][innerThat -1] = turn;
+          console.log(winArr);
           that.text(turn);
         }
 
-        getInsideWinner(that); //checks winner for both inside and outside
-        getOutsideWinner();
+        newInsideWinner(that); //checks winner for both inside and outside
+        newOutsideWinner();
 
         that.parents('.outerbox').removeClass('active');
 
@@ -120,118 +122,73 @@ $(document).ready(function() {
 
    var outerWin = function (winner) {
     $('#outer5').parent().siblings().toggle('explode', {pieces: 128}, 2000);
-    $('#outer5').parent().html(winner.toUpperCase() + ' is winner!');
+    $('#outer5').parent().html(winner + ' is winner!');
     $('#restart').show();
    };
 
-   var getOutsideWinner = function () { //when someone wins inside game it adds class x or o, this checks those for full winner.
-    var y = 'x';
-    for (var i=0; i<2; i++) {
-      if ($('#outer1').hasClass(y) && $('#outer2').hasClass(y) && $('#outer3').hasClass(y)) {
-        outerWin(y);
+   var newOutsideWinner = function () {
+    for (var i=0; i<7; i+=3){
+      if (winArr[i] === winArr[1+i] && winArr[i] === winArr[2+i]) {
+        outerWin(turn);
       }
-      else if ($('#outer4').hasClass(y) && $('#outer5').hasClass(y) && $('#outer6').hasClass(y)) {
-        outerWin(y);
+    }
+    for (i=0; i<3; i++) {
+      if (winArr[i] === winArr[3+i] && winArr[i] === winArr[6+i]) {
+        outerWin(turn);
       }
-      else if ($('#outer7').hasClass(y) && $('#outer8').hasClass(y) && $('#outer9').hasClass(y)) {
-        outerWin(y);
-      }
-      else if ($('#outer1').hasClass(y) && $('#outer4').hasClass(y) && $('#outer7').hasClass(y)) {
-        outerWin(y);
-      }
-      else if ($('#outer2').hasClass(y) && $('#outer5').hasClass(y) && $('#outer8').hasClass(y)) {
-        outerWin(y);
-      }
-      else if ($('#outer3').hasClass(y) && $('#outer6').hasClass(y) && $('#outer9').hasClass(y)) {
-        outerWin(y);
-      }
-      else if ($('#outer1').hasClass(y) && $('#outer5').hasClass(y) && $('#outer9').hasClass(y)) {
-        outerWin(y);
-      }
-      else if ($('#outer3').hasClass(y) && $('#outer5').hasClass(y) && $('#outer7').hasClass(y)) {
-        outerWin(y);
-      }
-      y = 'o';
+    }
+    if (winArr[0] === winArr[4] && winArr[0] === winArr[8]) {
+      outerWin(turn);
+    }
+    if (winArr[2] === winArr[4] && winArr[2] === winArr[6]) {
+      outerWin(turn);
     }
    };
 
-   var getInsideWinner = function (x) {
-    var box = function (y) {
-      return x.parents('.outerbox').children().children(y); //Goes out to tictactoe board you're playing in and passes in value
-    };
+   var newInsideWinner = function(x) {
+    for (var j=0; j<9; j++) {
+      for (var i=0; i<7; i+=3) {
+        if (winArr[j][i] === winArr[j][1+i] && winArr[j][0+i] === winArr[j][2+i]) {
+          if (winArr[j][i] === 'X') {
+            xWon(x);
+            winArr[j] = turn; }
 
-    if (box('#box1').text() === box('#box2').text() && box('#box1').text() === box('#box3').text() && box('#box1').text() !== ''){
-      if (box('#box1').text() === 'X') {
-        xWon(x);
+          else if (winArr[j][i] === 'O'){
+            oWon(x);
+            winArr[j] = turn; }
+
+        }
       }
-      else {
-        oWon(x);
+      for (i=0; i<3; i++) {
+        if (winArr[j][i] === winArr[j][3+i] && winArr[j][i] === winArr[j][6+i]) {
+          if (winArr[j][i] === 'X') {
+            xWon(x);
+            winArr[j] = turn; }
+
+          else if (winArr[j][i] === 'O'){
+            oWon(x);
+            winArr[j] = turn; }
+        }
+      }
+      if (winArr[j][0] === winArr[j][4] && winArr[j][0] === winArr[j][8]) {
+        if (winArr[j][0] === 'X') {
+            xWon(x);
+            winArr[j] = turn; }
+
+        else if (winArr[j][0] === 'O'){
+          oWon(x);
+          winArr[j] = turn; }
+      }
+      if (winArr[j][2] === winArr[j][4] && winArr[j][2] === winArr[j][6]) {
+        if (winArr[j][2] === 'X') {
+            xWon(x);
+            winArr[j] = turn; }
+
+        else if (winArr[j][2] === 'O'){
+          oWon(x);
+          winArr[j] = turn; }
       }
     }
-
-    else if (box('#box4').text() === box('#box5').text() && box('#box4').text() === box('#box6').text() && box('#box4').text() !== ''){
-      if (box('#box4').text() === 'X') {
-       xWon(x);
-      }
-      else {
-        oWon(x);
-      }
-    }
-
-    else if (box('#box7').text() === box('#box8').text() && box('#box7').text() === box('#box9').text() && box('#box7').text() !== ''){
-      if (box('#box7').text() === 'X') {
-        xWon(x);
-      }
-      else {
-        oWon(x);
-      }
-    }
-
-    else if (box('#box1').text() === box('#box4').text() && box('#box1').text() === box('#box7').text() && box('#box1').text() !== ''){
-      if (box('#box1').text() === 'X') {
-        xWon(x);
-      }
-      else {
-        oWon(x);
-      }
-    }
-
-    else if (box('#box2').text() === box('#box5').text() && box('#box2').text() === box('#box8').text() && box('#box2').text() !== ''){
-      if (box('#box2').text() === 'X') {
-        xWon(x);
-      }
-      else {
-        oWon(x);
-      }
-    }
-
-    else if (box('#box3').text() === box('#box6').text() && box('#box3').text() === box('#box9').text() && box('#box3').text() !== ''){
-      if (box('#box3').text() === 'X') {
-        xWon(x);
-      }
-      else {
-        oWon(x);
-      }
-    }
-
-    else if (box('#box1').text() === box('#box5').text() && box('#box1').text() === box('#box9').text() && box('#box1').text() !== ''){
-      if (box('#box1').text() === 'X') {
-        xWon(x);
-      }
-      else {
-        oWon(x);
-      }
-    }
-
-    else if (box('#box3').text() === box('#box5').text() && box('#box3').text() === box('#box7').text() && box('#box3').text() !== ''){
-      if (box('#box3').text() === 'X') {
-        xWon(x);
-      }
-      else {
-        oWon(x);
-      }
-    }
-
    };
 
 });
