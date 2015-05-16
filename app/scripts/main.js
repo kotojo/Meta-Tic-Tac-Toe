@@ -14,9 +14,14 @@ $(document).ready(function() {
                 [null, null, null, null, null, null, null, null, null],
                 [null, null, null, null, null, null, null, null, null],
                 [null, null, null, null, null, null, null, null, null]];
-  console.log(winArr);
 
   $('#restart').hide();
+
+  var clearArr = function(x) {
+    for (var i = 0; i < 9; i++) {
+      x[i] = [null, null, null, null, null, null, null, null, null];
+    }
+  };
 
   var playerTurn = function () {
     $('#playerTurn').text(turn + '\'s turn');
@@ -37,8 +42,19 @@ $(document).ready(function() {
 
   playerTurn();
 
+    $('#check').click(function() {
+      if (turn === 'X') {
+        turn = 'O';
+      }
+      else {
+        turn = 'X';
+      }
+      playerTurn();
+    });
+
     $('#restart').click(function() {
-      $('.game').replaceWith(gameClone);
+      $('.bs-example-modal-sm').modal('hide');
+      clearArr(winArr);
       compActive();
       $('#restart').hide();
     });
@@ -60,7 +76,6 @@ $(document).ready(function() {
         }
         else {
           winArr[outerThat - 1][innerThat -1] = turn;
-          console.log(winArr);
           that.text(turn);
         }
 
@@ -121,8 +136,15 @@ $(document).ready(function() {
    };
 
    var outerWin = function (winner) {
-    $('#outer5').parent().siblings().toggle('explode', {pieces: 128}, 2000);
-    $('#outer5').parent().html(winner + ' is winner!');
+    $('.game').toggle('explode', {pieces: 128}, 2000);
+    $('.bs-example-modal-sm').modal('show');
+    $('.modal-content p').text(winner + 'wins!');
+    $('.game').children().children().children().children().text('');
+    $('.game').children().children().children().children().css('background-color', '');
+    $('.game').children().children().removeClass('x o');
+    setTimeout(function() {
+              $('.game').toggle('explode');
+            }, 2000);
     $('#restart').show();
    };
 
