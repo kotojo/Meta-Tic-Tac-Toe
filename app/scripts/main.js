@@ -3,9 +3,9 @@ $(document).ready(function() {
   'use strict';
 
   var turn = 'X'; //initalizes turn
-  var gameClone;
-  gameClone = $('.game').clone();//makes a duplicate of the game to restart with
-  var winArr = [[null, null, null, null, null, null, null, null, null],
+  var xWins = 0;  //winner counters
+  var oWins = 0;
+  var winArr = [[null, null, null, null, null, null, null, null, null], //reference array for getWinner functions
                 [null, null, null, null, null, null, null, null, null],
                 [null, null, null, null, null, null, null, null, null],
                 [null, null, null, null, null, null, null, null, null],
@@ -17,13 +17,13 @@ $(document).ready(function() {
 
   $('#restart').hide();
 
-  var clearArr = function(x) {
+  var clearArr = function(x) { //resets array for new game
     for (var i = 0; i < 9; i++) {
       x[i] = [null, null, null, null, null, null, null, null, null];
     }
   };
 
-  var playerTurn = function () {
+  var playerTurn = function () { //switches the text onscreen for player turn
     $('#playerTurn').text(turn + '\'s turn');
   };
 
@@ -38,11 +38,11 @@ $(document).ready(function() {
     }
   };
 
-  compActive();
+  compActive(); //sets active square for starting game
 
-  playerTurn();
+  playerTurn(); //initializes turn screen
 
-    $('#check').click(function() {
+    $('#check').click(function() { //if player turns on random square assignment it takes their turn away
       if (turn === 'X') {
         turn = 'O';
       }
@@ -52,7 +52,7 @@ $(document).ready(function() {
       playerTurn();
     });
 
-    $('#restart').click(function() {
+    $('#restart').click(function() { //on restart it clears all html and css changes and resets the array
       $('.bs-example-modal-sm').modal('hide');
       clearArr(winArr);
       compActive();
@@ -74,7 +74,7 @@ $(document).ready(function() {
           }, 500);
           return;
         }
-        else {
+        else {  //assigns square to player and adds value to array
           winArr[outerThat - 1][innerThat -1] = turn;
           that.text(turn);
         }
@@ -135,10 +135,22 @@ $(document).ready(function() {
      w.parents('.outerbox').addClass('o');
    };
 
-   var outerWin = function (winner) {
-    $('.game').toggle('explode', {pieces: 128}, 2000);
+   var winCount = function (winner) {
+    if (winner === 'X') {
+      xWins += 1;
+      $('#xWin').text('X: ' + xWins);
+    }
+    else if (winner === 'O') {
+      oWins += 1;
+      $('#oWin').text('O: ' + oWins);
+    }
+   };
+
+   var outerWin = function (winner) { // when someone wins it explodes screen, resets the html and css, shows winner, and increments score
+    $('.game').toggle('explode', {pieces: 128}, 1000);
     $('.bs-example-modal-sm').modal('show');
-    $('.modal-content p').text(winner + 'wins!');
+    $('.modal-content p').text(winner + ' wins!');
+    winCount(winner);
     $('.game').children().children().children().children().text('');
     $('.game').children().children().children().children().css('background-color', '');
     $('.game').children().children().removeClass('x o');
@@ -148,7 +160,7 @@ $(document).ready(function() {
     $('#restart').show();
    };
 
-   var newOutsideWinner = function () {
+   var newOutsideWinner = function () { //checks for meta game winner
     for (var i=0; i<7; i+=3){
       if (winArr[i] === winArr[1+i] && winArr[i] === winArr[2+i]) {
         outerWin(turn);
@@ -167,7 +179,7 @@ $(document).ready(function() {
     }
    };
 
-   var newInsideWinner = function(x) {
+   var newInsideWinner = function(x) { //checks for individual game winner
     for (var j=0; j<9; j++) {
       for (var i=0; i<7; i+=3) {
         if (winArr[j][i] === winArr[j][1+i] && winArr[j][0+i] === winArr[j][2+i]) {
