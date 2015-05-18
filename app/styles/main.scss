@@ -111,7 +111,6 @@ li {
 .outerbox {
   border: solid #CCC648 3px;
   background-color: #B3D4FF;
-  //border-radius: 25px;
 }
 
 .active {
@@ -138,4 +137,23 @@ label {
 
 input {
   bottom: 2.5vw;
+}
+
+.footerstyle {
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 22vw;
+  margin-right: 22vw;
+  background-color:rgba(72,164,204,1);
+  border-radius: 0px;
+}
+
+li {
+  display: inline;
+}
+
+.links {
+  color: #FFDC73;
+  text-decoration: none;
+  padding: 0 10px 0 10px;
 }
