@@ -13,5 +13,5 @@ or make it random. Random tends to go faster, but player choosen makes it more s
 
 ## Future ideas
 
-* Back in for saving wins/losses
+* Back end for saving wins/losses
 * AI component
